@@ -31,6 +31,11 @@ namespace KR.Scriptings.Camera
             inputEnableAxis.Dispose();
         }
 
+        private void Start()
+        {
+            cinemachineInputAxisController.enabled = false;
+        }
+
         private void EnableAxisPerformed(InputAction.CallbackContext context)
         {
             if (context.performed)

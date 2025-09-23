@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 544856362353600209}
   - component: {fileID: 4118369416256784438}
   m_Layer: 0
-  m_Name: M_body_torso.002
+  m_Name: M_body_torso upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1556,7 +1556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822540965644576252}
   m_Layer: 0
-  m_Name: Base_Parent
+  m_Name: BaseAvatar_Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6018,7 +6018,7 @@ GameObject:
   - component: {fileID: 2701251196484485977}
   - component: {fileID: 7800021929897852476}
   - component: {fileID: 4010815733803601727}
-  - component: {fileID: 3954548649292173571}
+  - component: {fileID: 7559925109475998953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6041,12 +6041,12 @@ Transform:
   m_Children:
   - {fileID: 7879463776459732357}
   - {fileID: 4822540965644576252}
-  - {fileID: 8637327420082251378}
-  - {fileID: 3360532571264332496}
   - {fileID: 2642782252587904211}
+  - {fileID: 8637327420082251378}
+  - {fileID: 3193699890900624817}
+  - {fileID: 3360532571264332496}
   - {fileID: 4009399355857036821}
   - {fileID: 3735511438540175179}
-  - {fileID: 3193699890900624817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7879463775846797170
@@ -6204,7 +6204,7 @@ MonoBehaviour:
   animationSpeedSmoothTime: 3
   animationSpeedSmoothTimeRelease: 5
   animationMaxSpeed: 5
---- !u!114 &3954548649292173571
+--- !u!114 &7559925109475998953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6213,10 +6213,97 @@ MonoBehaviour:
   m_GameObject: {fileID: 7879463775846797169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da3bd577a2f5f84419fa642271d51198, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e187f4bd3be90745b7c18cb8781e7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableOnStart: 1
+  baseAvatar:
+  - {fileID: 7879463776460426415}
+  - {fileID: 7879463775808173158}
+  - {fileID: 7879463777463455558}
+  - {fileID: 7879463775623025251}
+  - {fileID: 7879463775854483162}
+  - {fileID: 4118369416256784438}
+  - {fileID: 7879463776029388817}
+  - {fileID: 7879463776828069559}
+  - {fileID: 7879463776690870847}
+  - {fileID: 7879463775938071669}
+  - {fileID: 7879463776325183688}
+  - {fileID: 7879463777099617449}
+  - {fileID: 7879463777175364326}
+  avatarAccessoriesCustom:
+  - renderer: {fileID: 7561112277400440859}
+    baseAvatar: 0
+  - renderer: {fileID: 5482894933112607681}
+    baseAvatar: 0
+  avatarHeadCustom:
+  - renderer: {fileID: 5115063721219020541}
+    baseAvatar: 1
+  - renderer: {fileID: 7513853524934014476}
+    baseAvatar: 1
+  - renderer: {fileID: 2271420890974176423}
+    baseAvatar: 1
+  avatarOutfitCustom:
+  - renderer: {fileID: 689262793617707136}
+    baseAvatar: 4048
+  - renderer: {fileID: 789615085832030005}
+    baseAvatar: 464
+  - renderer: {fileID: 4935242902605406895}
+    baseAvatar: 4048
+  - renderer: {fileID: 4731431043674323002}
+    baseAvatar: 8158
+  avatarTopCustom:
+  - renderer: {fileID: 731522468108903283}
+    baseAvatar: 208
+  - renderer: {fileID: 3165246742363145666}
+    baseAvatar: 220
+  - renderer: {fileID: 3633580037461575637}
+    baseAvatar: 220
+  - renderer: {fileID: 1903489004428540282}
+    baseAvatar: 216
+  - renderer: {fileID: 807849758251937126}
+    baseAvatar: 216
+  - renderer: {fileID: 6088675934921720707}
+    baseAvatar: 208
+  - renderer: {fileID: 3818722554966515691}
+    baseAvatar: 80
+  - renderer: {fileID: 711227599683826434}
+    baseAvatar: 208
+  - renderer: {fileID: 589282655654742710}
+    baseAvatar: 220
+  - renderer: {fileID: 3756080209002093434}
+    baseAvatar: 220
+  - renderer: {fileID: 4829889364373528850}
+    baseAvatar: 220
+  - renderer: {fileID: 6064519348757635826}
+    baseAvatar: 220
+  avatarBottomCustom:
+  - renderer: {fileID: 3322242011351630746}
+    baseAvatar: 1792
+  - renderer: {fileID: 7602814192446769729}
+    baseAvatar: 256
+  - renderer: {fileID: 9028850034674411687}
+    baseAvatar: 256
+  - renderer: {fileID: 5729746462281851432}
+    baseAvatar: 3840
+  - renderer: {fileID: 8660694389784738161}
+    baseAvatar: 256
+  - renderer: {fileID: 4234011822875115159}
+    baseAvatar: 1792
+  avatarShoesCustom:
+  - renderer: {fileID: 3873630815604750528}
+    baseAvatar: 4096
+  - renderer: {fileID: 8090601269879347086}
+    baseAvatar: 4096
+  - renderer: {fileID: 141864458334685385}
+    baseAvatar: 4096
+  - renderer: {fileID: 8064138579702269785}
+    baseAvatar: 4096
+  - renderer: {fileID: 6481088240325738398}
+    baseAvatar: 4096
+  - renderer: {fileID: 6253679479594015796}
+    baseAvatar: 4096
+  - renderer: {fileID: 8331624251467496712}
+    baseAvatar: 4096
 --- !u!1 &7879463775854483160
 GameObject:
   m_ObjectHideFlags: 0
@@ -6897,7 +6984,7 @@ GameObject:
   - component: {fileID: 7879463776029388816}
   - component: {fileID: 7879463776029388817}
   m_Layer: 0
-  m_Name: M_body_torso.001
+  m_Name: M_body_torso middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8830,7 +8917,7 @@ GameObject:
   - component: {fileID: 7879463776828069558}
   - component: {fileID: 7879463776828069559}
   m_Layer: 0
-  m_Name: M_body_torso
+  m_Name: M_body_torso bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10367,7 +10454,7 @@ GameObject:
   - component: {fileID: 6628633540285656723}
   - component: {fileID: 7561112277400440859}
   m_Layer: 0
-  m_Name: Top_Scarf - widen - a
+  m_Name: ScarfA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10684,7 +10771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2642782252587904211}
   m_Layer: 0
-  m_Name: Top_Accessories
+  m_Name: Accessories
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11036,7 +11123,7 @@ GameObject:
   - component: {fileID: 7301627954242772937}
   - component: {fileID: 5482894933112607681}
   m_Layer: 0
-  m_Name: Top_Scarf - widen - b
+  m_Name: ScarfB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
