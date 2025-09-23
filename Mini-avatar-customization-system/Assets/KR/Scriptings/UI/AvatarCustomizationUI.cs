@@ -52,14 +52,14 @@ namespace KR.Scriptings.UI
             }
         }
 
-        private void Increment(KR.Scriptings.Avatar.Avatar avatar, bool isIncrement = true)
+        private void Increment(KR.Scriptings.Avatar.Avatar avatar, bool isIncrement = true) // Increment or Decrement the avatar customization
         {
             avatarCustomization.SetAvatarCustom(avatar, isIncrement ? 1 : -1, out AvatarCustom avatarCustom); // set avatar custom and get the current avatar custom
             texts[(int)avatar].text = avatarCustom.Equals(default(AvatarCustom)) ? defaultText : avatarCustom.renderer.name; // set the text to the current avatar custom name or default text
             CheckMutualExclusivity(avatar); // check for mutual exclusivity between Outfit and Top/Bottom/Shoes
         }
 
-        private void CheckMutualExclusivity(KR.Scriptings.Avatar.Avatar avatar)
+        private void CheckMutualExclusivity(KR.Scriptings.Avatar.Avatar avatar) // Disable/Enable buttons based on mutual exclusivity rules
         {
             switch (avatar)
             {

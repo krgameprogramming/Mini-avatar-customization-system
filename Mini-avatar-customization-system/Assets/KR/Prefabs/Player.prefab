@@ -6248,7 +6248,7 @@ MonoBehaviour:
   - renderer: {fileID: 789615085832030005}
     baseAvatar: 464
   - renderer: {fileID: 4935242902605406895}
-    baseAvatar: 4048
+    baseAvatar: 464
   - renderer: {fileID: 4731431043674323002}
     baseAvatar: 8158
   avatarTopCustom:
