@@ -8,11 +8,21 @@ namespace KR.Scriptings.Misc
 
         private void Start()
         {
-            if (disableOnStart)
+            Enable(!disableOnStart);
+        }
+
+        public void Enable(bool isEnabled)
+        {
+            switch (isEnabled)
             {
-                Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-                Cursor.visible = false;
+                case true:
+                    Cursor.lockState = CursorLockMode.None; // Unlock
+                    break;
+                case false:
+                    Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+                    break;
             }
+            Cursor.visible = isEnabled;
         }
     }
 }
