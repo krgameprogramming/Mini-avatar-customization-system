@@ -6016,11 +6016,9 @@ GameObject:
   - component: {fileID: 7879463776461743110}
   - component: {fileID: 7879463775846797170}
   - component: {fileID: 2701251196484485977}
-  - component: {fileID: 7800021929897852476}
-  - component: {fileID: 4010815733803601727}
   - component: {fileID: 7559925109475998953}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6096,114 +6094,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &7800021929897852476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7879463775846797169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e4e1ad877bbd946a2f1a6f9b74ed0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputMovement:
-    m_Name: Input Movement
-    m_Type: 0
-    m_ExpectedControlType: Vector2
-    m_Id: 86faab5f-9aae-4bd5-a6b3-81bc23cf3f03
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 906578fb-2388-4fc0-872b-87cd1d3f5773
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Movement
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 2ba0af1d-be2e-4bd5-9c4b-0fbdbbcce8ff
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Movement
-      m_Flags: 8
-    - m_Name: down
-      m_Id: f5dc1d65-bb2e-424b-8242-8bb473805f98
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Movement
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 5d243915-cb3b-44b6-be02-539f660db0ba
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Movement
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 9b69ca7e-c9b0-4184-a1ca-0df086bbe005
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Movement
-      m_Flags: 8
-    m_Flags: 0
-  inputSprint:
-    m_Name: Input Sprint
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: bfceee9c-a1f6-4094-ae79-2b955ad76a14
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d9be77e1-45ce-48dd-96c2-7d8cabeca796
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Sprint
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 509f087a-04a1-4db4-89cd-3d6e6e22b259
-      m_Path: <Keyboard>/leftShift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Sprint
-      m_Flags: 0
-    m_Flags: 0
-  controller: {fileID: 2701251196484485977}
-  speed: 3
-  sprintSpeed: 5
-  rotationSmoothTime: 5
-  gravity: -9.81
-  playerAnimation: {fileID: 4010815733803601727}
---- !u!114 &4010815733803601727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7879463775846797169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a0b1d416e8a3ed4ea270ffbf8c95d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 7879463775846797170}
-  animationSpeedSmoothTime: 3
-  animationSpeedSmoothTimeRelease: 5
-  animationMaxSpeed: 5
 --- !u!114 &7559925109475998953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6216,7 +6106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e187f4bd3be90745b7c18cb8781e7b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarCustomizationUI: {fileID: 0}
   baseAvatar:
   - {fileID: 7879463776460426415}
   - {fileID: 7879463775808173158}

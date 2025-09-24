@@ -1,6 +1,7 @@
 namespace KR.Scriptings.Avatar
 {
     using System;
+    using KR.Scriptings.UI.Avatar;
     using UnityEngine;
 
     [Flags]
@@ -42,8 +43,13 @@ namespace KR.Scriptings.Avatar
     public class AvatarCustomization : MonoBehaviour
     {
         [Header("Avatar Customization Settings")]
+        [SerializeField] private AvatarCustomizationUI avatarCustomizationUI;
+
         [Header("Base Avatar Skin Mesh Renderer")]
         [SerializeField] private SkinnedMeshRenderer[] baseAvatar;
+
+        [Header("Randomization Settings")]
+        [SerializeField] private bool randomOnEnable = false; // randomize avatar customization on enable
 
         [Header("Avatar Custom Up to Down (Modular Settings)")]
         [SerializeField] private AvatarCustom[] avatarAccessoriesCustom; // Accessories should be on the top
@@ -90,7 +96,22 @@ namespace KR.Scriptings.Avatar
         private readonly int defaultIndex = -1; // default index for no avatar custom
         private int bitmaskBaseAvatar = default; // current bitmask of base avatar body parts to disable
 
-        public void Start()
+        private void OnEnable()
+        {
+            if (randomOnEnable)
+            {
+                if (avatarCustomizationUI != null) // if the reference to AvatarCustomizationUI is set
+                {
+                    avatarCustomizationUI.RandomizeAll(); // randomize avatar customization on enable via UI
+                }
+                else
+                {
+                    SetRandomAllAvatarCustom(); // randomize avatar customization on enable via script
+                }
+            }
+        }
+
+        private void Awake()
         {
             Init(); // Initialize the avatar index array
         }
@@ -102,8 +123,21 @@ namespace KR.Scriptings.Avatar
             Debug.Log("Initialization is completed");
         }
 
-        public void SetAvatarCustom(Avatar avatar, int increment, out AvatarCustom avatarCustom) // Set the avatar custom based on the avatar type and increment/decrement the index
+        private void SetRandomAllAvatarCustom() // Set random avatar customization for all avatar types
         {
+            foreach (Avatar avatar in Enum.GetValues(typeof(Avatar))) // loop through each avatar type
+            {
+                if (avatar == Avatar.Outfit) // skip Outfit to avoid mutual exclusivity for randomization
+                {
+                    continue; // skip Outfit to avoid mutual exclusivity issues
+                }
+                SetAvatarCustom(avatar, 0, true, out _); // set random avatar custom for each avatar type
+            }
+        }
+
+        public void SetAvatarCustom(Avatar avatar, int increment, bool random, out AvatarCustom avatarCustom) // Set the avatar custom based on the avatar type and increment/decrement the index
+        {
+            increment = random ? UnityEngine.Random.Range(-1, GetAvatarCustom(avatar).Length) : increment; // if random is true, get a random increment value between -1 and the length of the avatar custom array - 1
             GetAvatarCustom(avatar, ref avatarIndex[(int)avatar], out avatarCustom); // get current avatar custom
             if (!avatarCustom.Equals(default(AvatarCustom))) // if not default, disable the current avatar custom
             {
@@ -138,7 +172,7 @@ namespace KR.Scriptings.Avatar
                     break;
             }
 
-            avatarIndex[(int)avatar] += increment; // increment or decrement the index
+            avatarIndex[(int)avatar] = random ? increment : avatarIndex[(int)avatar] + increment; // increment or decrement the index
             GetAvatarCustom(avatar, ref avatarIndex[(int)avatar], out avatarCustom); // get the new avatar custom
 
             if (!avatarCustom.Equals(default(AvatarCustom))) // if not default, enable the new avatar custom

@@ -1,4 +1,4 @@
-namespace KR.Scriptings.UI
+namespace KR.Scriptings.UI.Avatar
 {
     using UnityEngine;
     using UnityEngine.UI;
@@ -10,19 +10,28 @@ namespace KR.Scriptings.UI
         [Header("Avatar Customization UI Settings")]
         [SerializeField] private AvatarCustomization avatarCustomization;
 
+        [Header("UI Elements")]
         [SerializeField] private Button[] buttonIncrements;
         [SerializeField] private Button[] buttonDecrements;
         [SerializeField] private TextMeshProUGUI[] texts;
+        [SerializeField] private Button randomizeAllButton;
 
         private readonly string defaultText = "Default";
+        private bool initialized = false;
 
-        private void Start()
+        private void Awake()
         {
+            if (initialized)
+            {
+                return; // Prevent multiple initializations
+            }
+
             AddButtonListener(); // Add button listeners to each button
             foreach (TextMeshProUGUI text in texts)
             {
                 text.text = defaultText; // Set all texts to default
             }
+            initialized = true;
         }
 
         private void AddButtonListener()
@@ -47,14 +56,17 @@ namespace KR.Scriptings.UI
 
                 buttonDecrements[i].onClick.AddListener(() =>
                 {
-                    Increment((KR.Scriptings.Avatar.Avatar)buttonIndex, false); // false for decrement
+                    Increment((KR.Scriptings.Avatar.Avatar)buttonIndex, -1); // false for decrement
                 });
             }
+
+            // Add Randomize All Function to the randomize all button
+            randomizeAllButton.onClick.AddListener(RandomizeAll);
         }
 
-        private void Increment(KR.Scriptings.Avatar.Avatar avatar, bool isIncrement = true) // Increment or Decrement the avatar customization
+        private void Increment(KR.Scriptings.Avatar.Avatar avatar, int increment = 1, bool random = false) // Increment or Decrement the avatar customization
         {
-            avatarCustomization.SetAvatarCustom(avatar, isIncrement ? 1 : -1, out AvatarCustom avatarCustom); // set avatar custom and get the current avatar custom
+            avatarCustomization.SetAvatarCustom(avatar, increment, random, out AvatarCustom avatarCustom); // set the avatar custom based on the avatar type and increment/decrement the index
             texts[(int)avatar].text = avatarCustom.Equals(default(AvatarCustom)) ? defaultText : avatarCustom.renderer.name; // set the text to the current avatar custom name or default text
             CheckMutualExclusivity(avatar); // check for mutual exclusivity between Outfit and Top/Bottom/Shoes
         }
@@ -76,6 +88,19 @@ namespace KR.Scriptings.UI
                     texts[(int)Scriptings.Avatar.Avatar.Bottom].text == defaultText &&
                     texts[(int)Scriptings.Avatar.Avatar.Shoes].text == defaultText;
                     break;
+            }
+        }
+
+        public void RandomizeAll() // Randomize all avatar customizations
+        {
+            Awake(); // Ensure initialization
+            for (int i = 0; i < buttonIncrements.Length; i++)
+            {
+                if (i == (int)KR.Scriptings.Avatar.Avatar.Outfit) // Skip Outfit to avoid mutual exclusivity issues for randomization
+                {
+                    continue; // Skip Outfit to avoid mutual exclusivity issues
+                }
+                Increment((KR.Scriptings.Avatar.Avatar)i, random: true);
             }
         }
     }
