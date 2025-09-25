@@ -5,8 +5,11 @@ This was created as part of a hiring test submission for a studio in Kuala Lumpu
 
 ---
 
-## Demo Playable
-![Gameplay Demo](Documentation/Demoplayable.gif)
+## Demo Player Customization
+![Player Customization Demo](Documentation/Demoeditor.gif)
+
+## Demo NPC Population with Random Parts on spawn
+![NPC Population Demo](Documentation/Demoplayable.gif)
 
 ---
 
