@@ -5,11 +5,16 @@ This was created as part of a hiring test submission for a studio in Kuala Lumpu
 
 ---
 
+## Demo Playable
+![Gameplay Demo](Documentation/Demoplayable.gif)
+
+---
+
 ## 🎯 Features
 
 - Swapable avatar parts (e.g. accessories, head, outfit, top, bottom, and shoes)
 - Swapable avatar parts having mutual exclusivity for outfit and top/bottom/shoes as packed in the same category
-- Simple UI to select parts
+- Simple UI to select and swap parts
 - NPC population with random parts selection
 - Extensible architecture to add new parts, categories, and features
 - Easy to use and integrate into existing projects
@@ -34,9 +39,26 @@ note: Bitmask and enum combination for better scalability and performance
 ### Spawn Manager (NPC Population)
 - I assumed that the NPCs will be populated in the scene using a simple script that randomly selects parts from the available categories to create a unique avatar for each NPC.
 
-note:
-- for new objects/models, the parts should be properly rigged and weighted to the base mesh to ensure proper deformation during animations.
-- for assigning new objects/models, the parts should be assigned to the correct category list in the AvatarCustomization script to ensure proper functionality (easy add by inspector).
+### Player Movement and Animation
+- I assumed that the player will be able to move around the scene using keyboard inputs, and the movement will be smooth and responsive.
+- I assumed that the player will have basic animations for idle and walking/running, and the animations will transition smoothly based on the player's movement.
+
+### Camera Controller
+- I assumed that the camera will follow the player and provide basic third-person controls, allowing the user to rotate the camera around the player.
+
+### Mouse Visibility
+- I assumed that the mouse cursor will be hidden and locked to the center of the screen during gameplay, and will be visible and unlocked when interacting with the UI.
+
+### User Interface (UI)
+- I assumed that the UI will be simple and intuitive, allowing users to easily customize their avatar and spawn/despawn NPCs.
+
+### Adding New Parts/Models
+- for new parts/models, the parts should be properly rigged and weighted to the base mesh to ensure proper deformation during animations.
+- for assigning new parts/models, the parts should be assigned to the correct category list in the AvatarCustomization script to ensure proper functionality (easy add by inspector).
+
+### Adding New Categories
+- for new categories, the enum and bitmask should be updated to include the new category.
+- for adding new categories, the AvatarCustomization script should be updated to include the new category list and the necessary logic to handle the new category (minimal code changes). Also update the AvatarCustomizationUI script to include the new category buttons that easily add by inspector, logic will be handled by the script.
 
 
 ---
@@ -83,10 +105,9 @@ Unity Renderer
      - Example: 100 trees → 1 instanced draw call
      - Does NOT work for SkinnedMeshRenderer (characters)
 ```
-```
-Summaries:
+#### SRP Batcher Summary
 Since GPU Instancing does not work for SkinnedMeshRenderer (characters), I implemented SRP Batcher with one same shader for all parts to reduce SetPass Calls and improve performance for CPU and GPU usage.
-```
+
 
 ### 🛠️Mesh Combining (include SRP Batcher)
 Implemented on branch: [`performance_mesh_combining(include SRP Batcher)`](https://github.com/krgameprogramming/Mini-avatar-customization-system/tree/performance_ssrp_batcher_AND_mesh_combine)
@@ -121,10 +142,9 @@ Implemented on branch: [`performance_mesh_combining(include SRP Batcher)`](https
                   │ - Low flexibility for customization
                   ▼
 ```
-```
-Summaries:
+#### Mesh Combining Summary
 I implemented mesh combining to reduce draw calls skin on GPU for better performance. Eventhough the result is great but it has high recombine cost at runtime if parts change often, so my assumption this is not suitable for this system. But I included it for reference.
-```
+
 
 ---
 
@@ -134,6 +154,11 @@ I implemented mesh combining to reduce draw calls skin on GPU for better perform
 - I learned about the trade-offs between using separated skinned meshes versus combining/recombining them for avatar customization.
 - Separated skinned meshes offer high flexibility and easier management of multiple materials at runtime, but they come with a performance cost due to increased draw calls and skinning updates.
 - Combining meshes can reduce draw calls and improve performance, but it comes with its own set of challenges, such as high recombine costs at runtime and reduced flexibility for customization. But I would like to try to implement it if I had more time.
+
+### 🛠️Try Texture Atlas
+- I learned that using a texture atlas can help reduce the number of materials and draw calls, which can improve performance.
+- By combining multiple textures into a single atlas, we can reduce the number of texture bindings required during rendering.
+- This can be particularly beneficial for avatar customization systems, where multiple parts may use different textures.
 
 ### 🛠️(Most Wanted) Try Bake Skinned Mesh Renderer to Mesh Renderer -> VAT -> LOD
 ```
@@ -161,6 +186,82 @@ I implemented mesh combining to reduce draw calls skin on GPU for better perform
   High   Medium  Low
   Mesh    Mesh  Billboard
 ```
+
+---
+
+
+## 📷 Unity Profiler Results with Screenshots
+
+###  📈Default without Optimization
+#### Player (1 Character)
+[<img src="Documentation/Main_Player.png" width="100%" alt="Main Player">](Documentation/Main_Player.png)
+[<img src="Documentation/Main_Player_FrameDebugger.png" width="100%" alt="Main Player Frame Debugger">](Documentation/Main_Player_FrameDebugger.png)
+#### Player (1 Character) + NPCs (5 Characters)
+[<img src="Documentation/Main_Player5NPC.png" width="100%" alt="Main Player with 5 NPCs">](Documentation/Main_Player5NPC.png)
+[<img src="Documentation/Main_Player5NPC_FrameDebugger.png" width="100%" alt="Main Player with 5 NPCs Frame Debugger">](Documentation/Main_Player5NPC_FrameDebugger.png)
+
+###  📈SRP Batcher (lower SetPass Calls)
+#### Player (1 Character)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player.png" width="100%" alt="Main Player SRP Batcher">](Documentation/Perform_SRPBatcher(passcall)_Player.png)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player_FrameDebugger.png" width="100%" alt="Main Player SRP Batcher Frame Debugger">](Documentation/Perform_SRPBatcher(passcall)_Player_FrameDebugger.png)
+#### Player (1 Character) + NPCs (5 Characters)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player5NPC.png" width="100%" alt="Main Player with 5 NPCs SRP Batcher">](Documentation/Perform_SRPBatcher(passcall)_Player5NPC.png)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player5NPC_FrameDebugger.png" width="100%" alt="Main Player with 5 NPCs SRP Batcher Frame Debugger">](Documentation/Perform_SRPBatcher(passcall)_Player5NPC_FrameDebugger.png)
+#### Player (1 Character) + NPCs (50 Characters)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player50NPC.png" width="100%" alt="Main Player with 50 NPCs SRP Batcher">](Documentation/Perform_SRPBatcher(passcall)_Player50NPC.png)
+[<img src="Documentation/Perform_SRPBatcher(passcall)_Player50NPC_FrameDebugger.png" width="100%" alt="Main Player with 50 NPCs SRP Batcher Frame Debugger">](Documentation/Perform_SRPBatcher(passcall)_Player50NPC_FrameDebugger.png)
+#### [`Summary`](#srp-batcher-summary)
+
+###  📈Mesh Combining + SRP Batcher (lower Draw Calls Skin on GPU)
+#### Before and After Mesh Combining
+Creating combined mesh at start (before) and after (after) mesh combining. Destroy the original separated skinned meshes after combining.
+
+[<img src="Documentation/Perform_MeshCombine_before.png" width="100%" alt="Main Player Mesh Combine Before">](Documentation/Perform_MeshCombine_before.png)
+[<img src="Documentation/Perform_MeshCombine_after.png" width="100%" alt="Main Player Mesh Combine After">](Documentation/Perform_MeshCombine_after.png)
+#### Player (1 Character) + NPCs (5 Characters)
+[<img src="Documentation/Perform_MeshCombine_Player5NPC.png" width="100%" alt="Main Player with 5 NPCs Mesh Combine">](Documentation/Perform_MeshCombine_Player5NPC.png)
+[<img src="Documentation/Perform_MeshCombine_Player5NPC_FrameDebugger.png" width="100%" alt="Main Player with 5 NPCs Mesh Combine Frame Debugger">](Documentation/Perform_MeshCombine_Player5NPC_FrameDebugger.png)
+#### Player (1 Character) + NPCs (50 Characters)
+[<img src="Documentation/Perform_MeshCombine_Player50NPC.png" width="100%" alt="Main Player with 50 NPCs Mesh Combine">](Documentation/Perform_MeshCombine_Player50NPC.png)
+[<img src="Documentation/Perform_MeshCombine_Player50NPC_FrameDebugger.png" width="100%" alt="Main Player with 50 NPCs Mesh Combine Frame Debugger">](Documentation/Perform_MeshCombine_Player50NPC_FrameDebugger.png)
+#### [`Summary`](#mesh-combining-summary)
+
+---
+
+## 📈 Answer to Bonus Question:
+### 📈 Performance Improvements for Low-end Mobile Devices
+Q: How would you profile and optimize this for low-end mobile devices?
+
+A:
+- First, Use Unity Profiler to identify performance bottlenecks, focusing on CPU and GPU usage, draw calls, and memory allocation.
+- Implement SRP Batcher to reduce CPU overhead for draw calls using the same shader.
+- Use Mesh Combining to reduce draw calls skin on GPU for better performance. (make the assumption that parts do not change often (on pause menu))
+- Implement Level of Detail (LOD) to reduce the complexity of distant objects.
+- Use occlusion culling to avoid rendering objects that are not visible to the camera.
+- Optimize textures and materials by using compressed texture formats and reducing the number of materials used.
+- Implement texture atlasing to combine multiple textures into a single texture, reducing the number of texture bindings.
+- Reduce the number of bones in the skinned mesh to improve skinning performance.
+- Optimize animations by reducing the number of keyframes and using simpler animation curves.
+- Low Poly models for the avatar and parts to reduce the number of vertices and triangles.
+- Use baked lighting instead of real-time lighting to reduce the rendering load.
+- Limit the number of NPCs spawned in the scene to reduce the overall rendering load.
+- Test on actual low-end mobile devices to ensure performance improvements are effective.
+
+### 📈 What Tools/Pipelines for Designers
+Q: If you were building this as part of a larger system, what kind of tooling or pipelines would you create for designers?
+
+A:
+- For documentation, create a comprehensive documentation and guidelines for designers on how to create and rig avatar parts to ensure consistency and quality.
+- For programming, create a modular and extensible codebase that allows for easy addition of new features and functionality in the future.
+- For programming, create a custom editor window in Unity that allows designers to easily add, remove, and manage avatar parts and categories.
+- For programming, using Unity's ScriptableObject to create data assets for avatar parts and categories, allowing designers to easily create and manage parts without modifying code.
+- For programming, using Unity's Addressable Asset System to manage and load avatar parts and categories efficiently. And if patching is needed, it will be easier to manage.
+- For programming, If really needed, using Unity's Entity Component System (ECS) for better performance and scalability, especially if the system needs to handle a large number of avatars and parts.
+- For asset management, create a library of pre-made avatar parts that designers can use as a starting point for their designs.
+- For version control, implement a version control system for avatar parts to track changes and allow designers to revert to previous versions if needed.
+- For previewing, implement a preview system that allows designers to see how different parts look on the avatar in real-time.
+- For testing, create a testing framework that allows designers to test their avatar parts in different scenarios and ensure they work correctly.
+- For live operations, implement analytics to track user behavior and preferences regarding avatar customization, allowing for data-driven decisions on future updates and improvements.
 
 ---
 
@@ -201,8 +302,10 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 If you have questions, suggestions, or want to collaborate:
 
-GitHub: krgameprogramming
-
-Email: kasrayga.business@gmail.com
+- GitHub: https://github.com/krgameprogramming (krgameprogramming)
+- Gitlab: https://gitlab.com/krgameprogramming (krgameprogramming)
+- Email: kasrayga.business@gmail.com
+- LinkedIn: https://linkedin.com/in/kasraygaa (Kas Raygaputra Ilaga)
+- Portfolio Showcase (on development): https://krgameprogramming.my.canva.site/ (Kas Rayga Showcase)
 
 ---
