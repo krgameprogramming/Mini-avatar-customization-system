@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6203088078451550099}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e187f4bd3be90745b7c18cb8781e7b2, type: 3}
   m_Name: 
@@ -6697,7 +6697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1475368408
 Transform:
   m_ObjectHideFlags: 0
@@ -8371,7 +8371,7 @@ MonoBehaviour:
   spawnRadius: 3
   npcPrefab: {fileID: 7879463775846797169, guid: 0270576aa29f95240846f96f748821cf, type: 3}
   initialNPCs: 5
-  maxNPCs: 10
+  maxNPCs: 50
   spawnedNPCs: []
 --- !u!1 &2019453078
 GameObject:
@@ -8669,7 +8669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8677,7 +8677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8689,7 +8689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7879463776461743110, guid: e0acdcb248a30a343b7679e8daca13f7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
