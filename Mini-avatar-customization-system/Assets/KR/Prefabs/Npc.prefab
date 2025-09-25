@@ -1555,6 +1555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4822540965644576252}
+  - component: {fileID: 4711760753162118198}
   m_Layer: 0
   m_Name: BaseAvatar_Parent
   m_TagString: Untagged
@@ -1590,6 +1591,18 @@ Transform:
   - {fileID: 7879463777175364325}
   m_Father: {fileID: 7879463776461743110}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4711760753162118198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229177639454485248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befaf87ab16fb6e4f8ca527a16532903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2939689412471560946
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,7 +6134,7 @@ MonoBehaviour:
   - {fileID: 7879463776325183688}
   - {fileID: 7879463777099617449}
   - {fileID: 7879463777175364326}
-  randomOnEnable: 1
+  randomOnEnable: 0
   avatarAccessoriesCustom:
   - renderer: {fileID: 7561112277400440859}
     baseAvatar: 0
