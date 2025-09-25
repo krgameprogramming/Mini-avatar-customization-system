@@ -145,11 +145,6 @@ namespace KR.Scriptings.Avatar
                 avatarCustom.renderer.gameObject.SetActive(false); // disable the current avatar custom
                 Debug.Log($"Unset Current Avatar Custom {avatar} for {avatarCustom.renderer.name}");
             }
-            else
-            {
-                bitmaskBaseAvatar &= ~(int)(BaseAvatar)(int)avatar; // if default, remove the base avatar body parts from the list to disable later
-                Debug.Log($"Unset Current Avatar Custom {avatar} as default");
-            }
 
             // Check for mutual exclusivity between Outfit and Top/Bottom/Shoes
             switch (avatar)
@@ -184,11 +179,6 @@ namespace KR.Scriptings.Avatar
                 avatarCustom.renderer.gameObject.SetActive(true); // enable the new avatar custom
                 Debug.Log($"Set New Avatar Custom {avatar} for {avatarCustom.renderer.name}"); // enable the new avatar custom
             }
-            else
-            {
-                bitmaskBaseAvatar &= ~(int)(BaseAvatar)(int)avatar; // if default, remove the base avatar body parts from the list to disable later
-                Debug.Log($"Set New Avatar Custom {avatar} as default"); // if default, just log it
-            }
             SetBaseAvatar(); // disable the base avatar body parts based on the bitmask list
         }
 
@@ -197,6 +187,12 @@ namespace KR.Scriptings.Avatar
             foreach (SkinnedMeshRenderer renderer in baseAvatar) // enable all base avatar body parts first
             {
                 renderer.gameObject.SetActive(true);
+            }
+
+            if (bitmaskBaseAvatar == 0) // if no base avatar body parts to disable, return
+            {
+                Debug.Log("Set Base Avatar Body Parts as default");
+                return;
             }
 
             foreach (BaseAvatar part in Enum.GetValues(typeof(BaseAvatar))) // disable the base avatar body parts based on the combined bitmask
