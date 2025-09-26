@@ -5,6 +5,21 @@ This was created as part of a hiring test submission for a studio in Kuala Lumpu
 
 ---
 
+## 🎯 Features
+
+- Swapable avatar parts (e.g. accessories, head, outfit, top, bottom, and shoes).
+- Swapable avatar parts having mutual exclusivity for outfit and top/bottom/shoes as packed.
+- Simple UI to select and swap parts.
+- NPC population with random parts selection.
+- Extensible architecture to add new parts, categories, and features.
+- Easy to use and integrate into existing projects.
+note: Bitmask and enum combination for better scalability and performance.
+
+---
+
+## Setup Avatar Customization System
+![Player Customization Demo](Documentation/Demosetup.gif)
+
 ## Demo Player Customization
 ![Player Customization Demo](Documentation/Demoeditor.gif)
 
@@ -13,17 +28,6 @@ This was created as part of a hiring test submission for a studio in Kuala Lumpu
 
 ---
 
-## 🎯 Features
-
-- Swapable avatar parts (e.g. accessories, head, outfit, top, bottom, and shoes)
-- Swapable avatar parts having mutual exclusivity for outfit and top/bottom/shoes as packed in the same category
-- Simple UI to select and swap parts
-- NPC population with random parts selection
-- Extensible architecture to add new parts, categories, and features
-- Easy to use and integrate into existing projects
-note: Bitmask and enum combination for better scalability and performance
-
----
 
 ## ❓ Decisions & Assumptions
 
